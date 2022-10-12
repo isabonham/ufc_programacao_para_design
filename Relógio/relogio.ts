@@ -1,5 +1,5 @@
 /*
-O QUE APRENDI: posso fazer verificações com os atributos dos contrutores também;
+O QUE APRENDI: posso fazer verificações com os atributos dos construtores também;
 COM QUEM APRENDI: em casa com ajuda de um amigo;
 COMO APRENDI: fiz 90% do código sozinha, com os conhecimentos de antes, 
               mas no replit tava dando um erro que eu não sabia o que era, até que pedi ajuda do meu amigo 
