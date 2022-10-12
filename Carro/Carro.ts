@@ -68,6 +68,9 @@ class Carro {
 
 let carro1 = new Carro();
 
+
+// CASOS DE TESTE
+
 //#__case inicializar
 console.log("\n#__case inicializar\n");
 
