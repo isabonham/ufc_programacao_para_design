@@ -1,9 +1,13 @@
 /*
 O QUE APRENDI: posso fazer verificações com os atributos dos contrutores também;
 COM QUEM APRENDI: em casa com ajuda de um amigo;
-COMO APRENDI: fiz 90% do código sozinha, com os conhecimentos de antes, mas no replit tava dando um erro que eu não sabia o que era, até que pedi ajuda do meu amigo e ele notou que no teste o objeto era criado do zero e dava erro justamente porque eu não fazia as verificações no contrutor do relógio;
+COMO APRENDI: fiz 90% do código sozinha, com os conhecimentos de antes, 
+              mas no replit tava dando um erro que eu não sabia o que era, até que pedi ajuda do meu amigo 
+              e ele notou que no teste o objeto era criado do zero e dava erro justamente porque eu 
+              não fazia as verificações no contrutor do relógio;
 
-TEMPO: 45min >>>>> + 30min quebrando a cabeça pra entender porque não tava funcionando + 15 min com meu amigo vendo o que tava errado
+TEMPO: 45min >>>>> + 30min quebrando a cabeça pra entender porque não tava funcionando 
+                   + 15 min com meu amigo vendo o que tava errado
 */
 
 class Time {
