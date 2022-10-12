@@ -42,7 +42,7 @@ class Car {
       }
     }
 
-    drive (km) {
+    drive(km) {
       if(this.pass === 0) {
         console.log("fail: nao ha ninguem no carro");
         return;
