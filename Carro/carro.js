@@ -1,3 +1,11 @@
+/*
+O QUE APRENDI: o que são atributos e para que servem os métodos;
+COM QUEM APRENDI: com o professor durante a aula;
+COMO APRENDI: prestando atenção no que o professor tava ensinando;
+
+TEMPO: 1H 30min >>>>> tempo da aula
+*/
+
 class Car {
     pass;
     passMax;
