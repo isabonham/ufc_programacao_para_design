@@ -1,3 +1,11 @@
+/*
+O QUE APRENDI: diferença entre js e ts >>>>> tipagens; aprendi também que dá pra chamar um método dentro de outro método;
+COM QUEM APRENDI: com o professor durante a aula; tirei a dúvida sobre chamar um método dentro do outro pelo telegram quando tava resolvendo a questão em casa;
+COMO APRENDI: prestando atenção no que o professor tava ensinando; tirando dúvida pelo telegram;
+
+TEMPO: 1H
+*/
+
 class Calculadora {
     public batteryMax: number;
     public battery: number;
@@ -48,6 +56,8 @@ class Calculadora {
         return "display = " + this.display.toFixed(2) + ", battery = " + this.battery;
     }
 }
+
+// CASOS DE TESTE
 
 //#__case iniciar mostrar e recarregar
 console.log("\n#__case iniciar mostrar e recarregar\n");
