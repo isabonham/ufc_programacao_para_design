@@ -121,13 +121,14 @@ class Budega {
             }
         }
         saida += "]";
-        // saida += "\nEspera: [" + this.espera + "]";
 
         return saida;
     }
 }
 
 function main () {
+
+    // CASOS DE TESTE
 
     //#__case iniciar
     console.log("\n#__case iniciar\n");
