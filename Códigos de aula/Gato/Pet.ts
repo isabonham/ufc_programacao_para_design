@@ -55,7 +55,17 @@ function main() {
         .map(elem => elem.getNome());
     console.log(somente_cachorros);
 
-    
+    // sacola só com gatos
+    let gatos = sacola
+        .filter(elem => elem.getTipo() === "gato")
+
+    console.log(gatos);
+        
+    // sacola só com quem não é gato
+    let sem_gatos = sacola
+        .filter(elem => elem.getTipo() !== "gato")
+
+    console.log(sem_gatos);
 }
 
 main()
