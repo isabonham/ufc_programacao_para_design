@@ -1,3 +1,4 @@
+import { SetAccessorDeclaration } from "typescript";
 
 class Pet {
     private nome: string;
@@ -31,24 +32,31 @@ function main() {
     sacola.push(new Pet("tom", "gato"));
     sacola.push(new Pet("sabrina", "humana"));
 
-    let i = 0;
-    while (i < sacola.length) {
-        if (sacola[i].getTipo() !== "gato") {
-            sacola.splice(i, 1);
-        } else {
-            i += 1;
-        }
-    }
+    // let i = 0;
+    // while (i < sacola.length) {
+    //     if (sacola[i].getTipo() !== "gato") {
+    //         sacola.splice(i, 1);
+    //     } else {
+    //         i += 1;
+    //     }
+    // }
 
-    let sacola_gatos = sacola
-        .filter(elem => elem.getTipo() == "gato")
-        .map(elem => elem.getNome());
+    // let sacola_gatos = sacola
+    //     .filter(elem => elem.getTipo() == "gato")
+    //     .map(elem => elem.getNome());
     
-    let nomes_gatos: string[] = [];
-    for (let elem of sacola) {
-        if (elem.getTipo() == "gato")
-            nomes_gatos.push(elem.getNome());
-    }
+    // let nomes_gatos: string[] = [];
+    // for (let elem of sacola) {
+    //     if (elem.getTipo() == "gato")
+    //         nomes_gatos.push(elem.getNome());
+    // }
+
+    // pegar só os cachorros
+    let somente_cachorros = sacola
+        .filter(elem => elem.getTipo() === "cachorro")
+        .map(elem => elem.getNome());
+    console.log(somente_cachorros);
+
     
 }
 
