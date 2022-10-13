@@ -29,6 +29,7 @@ function main() {
     sacola.push(new Pet("pluto", "cachorro"));
     sacola.push(new Pet("tom", "gato"));
     sacola.push(new Pet("sabrina", "humana"));
+    sacola.push(new Pet("pateta", "cachorro"));
 
     // tirando os não gatos da sacola
     // let i = 0;
@@ -68,6 +69,10 @@ function main() {
         .filter(elem => elem.getTipo() !== "gato")
 
     console.log(sem_gatos);
+
+    // nome dos cachorros
+    let cachorros_nomes = sacola.filter(elem => elem.getTipo() === "cachorro").map(elem => elem.getNome());
+    console.log(cachorros_nomes);
 }
 
 main()
