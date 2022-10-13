@@ -30,6 +30,7 @@ function main() {
     sacola.push(new Pet("tom", "gato"));
     sacola.push(new Pet("sabrina", "humana"));
 
+    // tirando os não gatos da sacola
     // let i = 0;
     // while (i < sacola.length) {
     //     if (sacola[i].getTipo() !== "gato") {
@@ -39,6 +40,7 @@ function main() {
     //     }
     // }
 
+    // pegando só os gatos
     // let sacola_gatos = sacola
     //     .filter(elem => elem.getTipo() == "gato")
     //     .map(elem => elem.getNome());
