@@ -1,5 +1,3 @@
-import { SetAccessorDeclaration } from "typescript";
-
 class Pet {
     private nome: string;
     private tipo: string;
