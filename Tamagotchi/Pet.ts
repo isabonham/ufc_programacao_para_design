@@ -44,9 +44,10 @@ class Pet { //todo
             this.hungry = this.hungryMax;
             return;
         }
-        if (this.hungry <= 0) {
+        if (this.hungry + value <= 0) {
             this.hungry = 0;
             this.alive = false;
+            console.log("fail: pet morreu de fome");
             return;
         }
         this.hungry += value;
