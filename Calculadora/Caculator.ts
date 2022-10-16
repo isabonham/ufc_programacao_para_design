@@ -6,12 +6,12 @@ COMO APRENDI: prestando atenção no que o professor tava ensinando; tirando dú
 TEMPO: 1H
 */
 
-class Calculadora {
+class Caculator {
     public batteryMax: number;
     public battery: number;
     public display: number;
 
-    constructor(batteryMax: number) {
+    public constructor(batteryMax: number) {
       this.batteryMax = batteryMax;
       this.battery = 0;
       this.display = 0;
@@ -62,7 +62,7 @@ class Calculadora {
 //#__case iniciar mostrar e recarregar
 console.log("\n#__case iniciar mostrar e recarregar\n");
 
-let calc1 = new Calculadora(5);
+let calc1 = new Caculator(5);
 
 console.log("" + calc1);
 calc1.chargeBattery(3);
@@ -72,7 +72,7 @@ console.log("" + calc1);
 calc1.chargeBattery(1);
 console.log("" + calc1);
 
-let calc2 = new Calculadora(4);
+let calc2 = new Caculator(4);
 
 calc2.chargeBattery(2);
 console.log("" + calc2);
@@ -82,7 +82,7 @@ console.log("" + calc2);
 //#__case somando
 console.log("\n#__case somando\n");
 
-let calc3 = new Calculadora(2);
+let calc3 = new Caculator(2);
 
 calc3.chargeBattery(2);
 calc3.sum(4, 3);
@@ -98,7 +98,7 @@ console.log("" + calc3);
 //#__case dividindo
 console.log("\n#__case dividindo\n");
 
-let calc4 = new Calculadora(3);
+let calc4 = new Caculator(3);
 
 calc4.chargeBattery(3);
 calc4.division(6, 3);
