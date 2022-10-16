@@ -7,13 +7,13 @@ TEMPO: 1H 30min >>>>> tempo da aula
 */
 
 class Car {
-    pass;
-    passMax;
-    gas;
-    gasMax;
-    km;
+    public pass: number;
+    public passMax: number;
+    public gas: number;
+    public gasMax: number;
+    public km: number;
 
-    constructor() {
+    public constructor () {
       this.pass = 0;
       this.passMax = 2;
       this.gas = 0;
@@ -43,14 +43,14 @@ class Car {
       }
     }
     
-    fuel(gas) {
+    fuel(gas: number) {
       this.gas += gas;
       if(this.gas > this.gasMax) {
         this.gas = this.gasMax;
       }
     }
 
-    drive(km) {
+    drive(km: number) {
       if(this.pass === 0) {
         console.log("fail: nao ha ninguem no carro");
         return;
@@ -74,52 +74,55 @@ class Car {
     }    
 }
 
-let car = new Car();
+let carro1 = new Car();
+
+
+// CASOS DE TESTE
 
 //#__case inicializar
 console.log("\n#__case inicializar\n");
 
-console.log("" + car);
-car.enter();
-car.enter();
-console.log("" + car);
-car.enter();
-console.log("" + car);
-car.leave();
-car.leave();
-car.leave();
-console.log("" + car);
+console.log("" + carro1);
+carro1.enter();
+carro1.enter();
+console.log("" + carro1);
+carro1.enter();
+console.log("" + carro1);
+carro1.leave();
+carro1.leave();
+carro1.leave();
+console.log("" + carro1);
 
 //#__case abastecer
 console.log("\n#__case abastecer\n");
 
-car.fuel(60);
-console.log("" + car);
+carro1.fuel(60);
+console.log("" + carro1);
 
 //#__case dirigir vazio
 console.log("\n#__case dirigir vazio\n");
 
-car.drive(10);
+carro1.drive(10);
 
 //#__case dirigir
 console.log("\n#__case dirigir\n");
 
-car.enter();
-car.drive(10);
-console.log("" + car);
+carro1.enter();
+carro1.drive(10);
+console.log("" + carro1);
 
 //#__case para longe
 console.log("\n#__case para longe\n");
 
-car.drive(70);
-car.drive(10);
-console.log("" + car);
+carro1.drive(70);
+carro1.drive(10);
+console.log("" + carro1);
 
 //#__case enchendo o tanque
 console.log("\n#__case enchendo o tanque\n");
 
-car.fuel(200);
-console.log("" + car);
+carro1.fuel(200);
+console.log("" + carro1);
 
 //#__end__
 console.log("\n#__end__\n");
