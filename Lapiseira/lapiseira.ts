@@ -14,13 +14,19 @@ class Lead {
     }
 
     public usagePerSheet(): number {
-        if (this.hardness === 'HB')
+        if (this.hardness === 'HB') {
             return 1;
-        if (this.hardness === '2B')
+        }
+        if (this.hardness === '2B') {
             return 2;
-        if (this.hardness === '4B')
+        }
+        if (this.hardness === '4B') {
             return 4;
-        return 6;
+        }
+        if (this.hardness === '6B') {
+            return 6;
+        }
+        return 0;
     }
 
     public getThickness(): number {
@@ -39,6 +45,7 @@ class Lead {
         this.size = size;
     }
 }
+
 class Pencil {
     private thickness: number;
     private tip: Lead | null;
@@ -46,7 +53,6 @@ class Pencil {
 
     public constructor(thickness: number) {
         this.thickness = thickness;
-
     }
 
     public insert(lead: Lead): boolean {
