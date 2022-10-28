@@ -128,7 +128,14 @@ class Pig {
         return true;
     }
 
-    public breakPig(): boolean { //todo
+    public breakPig(): boolean {
+        if (!this.broken) {
+            this.broken = true;
+            this.volume = 0;
+            return true;
+        }
+        console.log ("fail: the pig is almost broken");
+        return false;
     }
 
     public getCoins() : number {
