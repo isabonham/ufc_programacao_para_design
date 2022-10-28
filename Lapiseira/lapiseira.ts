@@ -61,11 +61,7 @@ class Pencil {
             console.log ("fail: calibre incompatível");
             return false;
         }
-        if (this.tip !== null) {
-            console.log ("teste, o bico está cheio então vou inserir no tambor")
-            this.barrel.push(new Lead(grafite.getThickness(), grafite.getHardness(), grafite.getSize()));
-        }
-        this.tip = new Lead(grafite.getThickness(), grafite.getHardness(), grafite.getSize());
+        this.barrel.push(new Lead(grafite.getThickness(), grafite.getHardness(), grafite.getSize()));
         return true;
     }
 
@@ -75,12 +71,18 @@ class Pencil {
     }
 
     public pull(): boolean {
-        return true
+        if (this.tip !== null) {
+            console.log ("fail: ja existe grafite no bico");
+            return false;
+        }
+        let grafite = this.barrel.shift()!;
+        this.tip = new Lead(grafite.getThickness(), grafite.getHardness(), grafite.getSize());
+        return true;
     }
 
     writePage(): void {
         if (this.tip === null) {
-            console.log ("fail: nao existe grafite");
+            console.log ("fail: nao existe grafite no bico");
         }
         else if (this.tip.getSize() <= 10) {
             console.log ("fail: tamanho insuficiente");
