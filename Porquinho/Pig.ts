@@ -1,4 +1,3 @@
-//create enumeration
 enum Cents {
     C10,
     C25,
@@ -11,22 +10,31 @@ class Coin {
     private volume: number;
     private label: string;
     
-    public constructor(value: number, volume: number, label: string) {
-        this.value = value;
-        this.volume = volume;
-        this.label = label;
+    public constructor(cents: Cents) {
+        switch (cents) {
+            case Cents.C10:
+                this.value = 0.10;
+                this.volume = 1;
+                this.label = "C10"
+                break;
+            case Cents.C25:
+                this.value = 0.25;
+                this.volume = 2;
+                this.label = "C25"
+                break;
+            case Cents.C50:
+                this.value = 0.50;
+                this.volume = 3;
+                this.label = "C50"
+                break;
+            case Cents.C100:
+                this.value = 1.00;
+                this.volume = 4;
+                this.label = "C100"
+                break;
+        }
     }
 
-    public static map = new Map<Cents, Coin> ([
-        [Cents.C10, new Coin(0.10, 1, "C10")],
-        [Cents.C25, new Coin(0.25, 2, "C25")],
-        [Cents.C50, new Coin(0.50, 3, "C50")],
-        [Cents.C100, new Coin(1.00, 4, "C100")],
-    ]);
-
-    public static get(cents: Cents): Coin {
-        return this.map.get(cents)!;
-    }
     public getValue(): number {
         return this.value;
     }
@@ -46,7 +54,7 @@ class Coin {
     }
 }
 
-class Item { //todo
+class Item {
     private label: string;
     private volume: number;
 
@@ -76,7 +84,7 @@ class Item { //todo
     }
 }
 
-class Pig { //todo
+class Pig {
     private items: string[];
     private volumeMax: number;
     private volume: number;
@@ -91,23 +99,64 @@ class Pig { //todo
         this.broken = false;
     }
 
-    public addItem(item: Item): boolean { //todo
+    public addItem(item: Item): boolean {
+        if (this.broken) {
+            console.log ("fail: the pig is broken");
+            return false;
+        }
+        else if (item.getVolume() + this.volume > this.volumeMax) {
+            console.log ("fail: the pig is full");
+            return false;
+        }
+        this.volume += item.getVolume();
+        this.items.push(item.getLabel());
+        return true;
     }
 
-    public addCoin(coin: Coin): boolean { //todo
+    public addCoin(coin: Coin): boolean {
+        console.log ("" + coin);
+        if (this.broken) {
+            console.log ("fail: the pig is broken");
+            return false;
+        }
+        else if (coin.getVolume() + this.volume > this.volumeMax) {
+            console.log ("fail: the pig is full");
+            return false;
+        }
+        this.volume += coin.getVolume();
+        this.value += coin.getValue();
+        return true;
     }
 
     public breakPig(): boolean { //todo
     }
 
-    public getCoins() : number { //todo
+    public getCoins() : number {
+        if (this.broken === true) {
+            let aux = this.value;
+            this.value = 0;
+            return aux;
+        }
+        console.log ("fail: you must break the pig first");
+        return 0;
     }
 
-    public getItems(): string { //todo
+    public getItems(): string {
+        if (this.broken === true) {
+            let aux = this.items.join(", ");
+            this.items = [];
+            return "[" + aux + "]";
+        }
+        console.log ("fail: you must break the pig first");
+        return "[]";
     }
     
     public toString(): string {
-        let aux = "[" + this.items.join(", ") + "]";
-        return `${aux} : ${this.value.toFixed(2)}\$ : ${this.volume}/${this.volumeMax} : ${this.broken ? "broken" : "unbroken"}`;
+        let response = "";
+        response = "[" + this.items.join(", ") + "]" + " : ";
+        response += this.value.toFixed(2) + "$ : ";
+        response += this.volume + "/" + this.volumeMax;
+        response += " : " + (this.broken? "broken" : "unbroken");
+        return response;
     }
 }
