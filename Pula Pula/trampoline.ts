@@ -75,7 +75,6 @@ class Trampoline {
         }
     }
 
-
     toString() : string {
         let response = "[";
         for (let i = 0; i < this.waiting.length; i++) {
