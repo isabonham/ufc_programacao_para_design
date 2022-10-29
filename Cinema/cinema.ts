@@ -96,7 +96,6 @@ class Cinema {
             }
             
         }
-        // response += this.seat.join(" ");
         response += "]";
         return response;
     }
