@@ -26,10 +26,9 @@ class Trampoline {
     waiting : Array<Kid>;
     size : number;
 
-    constructor(size : number){
+    public constructor(){
         this.playing = new Array<Kid>(); 
         this.waiting = new Array<Kid>();
-        this.size = size;
     }
   
     arrive (kid: Kid) : boolean {
@@ -44,19 +43,20 @@ class Trampoline {
         if (this.size === this.playing.length) {
             return console.log("pulapula cheio");
         }
-        this.playing.push(this.waiting[0]);
-        this.waiting.shift();
+        this.playing.unshift(this.waiting[this.waiting.length-1]);
+        this.waiting.pop();
     }
 
     leave() {
         if(this.playing.length == 0) {
             return "não há ninguem no pulapula";
         }
-        this.waiting.push(this.playing[0]);
-        this.playing.shift();
+        let kid = this.playing[this.playing.length-1];
+        this.waiting.unshift(kid!);
+        this.playing.pop();
     }
 
-    remover(kid : string) {
+    remove(kid : string) {
         if(this.waiting.length == 0 && this.playing.length == 0){
             return ("pulapula e fila vazios");
         }
@@ -76,17 +76,34 @@ class Trampoline {
     }
 
     toString() : string {
-        if(this.waiting.length == 0 && this.playing.length == 0){
-            return("pulapula e fila vazios");
-        }
-        let saida = "( ";
-        for (let j = 0; j < this.playing.length; j++) {
-            saida += `${this.playing[j]!.getName()} `;
-        } 
-        saida += ") [ ";    
+        let response = "[";
         for (let i = 0; i < this.waiting.length; i++) {
-            saida += `${this.waiting[i]!.getName()} `;
+            response += this.waiting[i]!.getName() + ":" + this.waiting[i]!.getAge();
+            if (i === this.waiting.length - 1) {
+                response += "]";
+            }
+            else {
+                response += ", ";
+            }
         }
-        return saida + "]";
+        if (this.waiting.length === 0) {
+            response += "]";
+        }
+
+        response += " => [";
+        for (let i = 0; i < this.playing.length; i++) {
+            response += this.playing[i]!.getName() + ":" + this.playing[i]!.getAge();
+            if (i === this.playing.length - 1) {
+                response += "]";
+            }
+            else {
+                response += ", ";
+            }
+        }
+        if (this.playing.length === 0) {
+            response += "]";
+        }
+        
+        return response;
     }
 }
