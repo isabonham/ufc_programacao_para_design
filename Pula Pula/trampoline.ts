@@ -16,7 +16,7 @@ class Kid {
     }
 
     toString() : string {
-        return `${this.name}, ${this.age} anos`;
+        return `${this.name}, ${this.age}`;
     }
 
 }
@@ -75,6 +75,7 @@ class Trampoline {
         }
     }
 
+
     toString() : string {
         let response = "[";
         for (let i = 0; i < this.waiting.length; i++) {
@@ -103,7 +104,7 @@ class Trampoline {
         if (this.playing.length === 0) {
             response += "]";
         }
-        
+
         return response;
     }
 }
