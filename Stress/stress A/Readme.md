@@ -1,8 +1,6 @@
 ## @000 Estressados A: Busca
-
 ***
-
-## Intro
+**Intro**
 
 - Na entrada de um evento de um experimento social, os participantes ganhavam uma pulseira especial que precisavam ficar utilizando.
 - A pulseira informava, num pequeno visor, um número inteiro que representava o nível de stress daquele participante.
