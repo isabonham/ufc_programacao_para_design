@@ -1,4 +1,4 @@
-## @000 Estressados A: Busca
+## Estressados
 ***
 **Introdução**
 
