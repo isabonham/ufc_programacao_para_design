@@ -2,7 +2,7 @@
 ***
 ## Funções:
 
-### filter
+*filter*
 - **get_men**: retorne uma lista com os homens.
 - **get_calm_women**: retorne uma lista com as mulheres stress menor que 10.
 
