@@ -1,3 +1,4 @@
+// ------------------- Leitura e Escrita ------------------
 let __lines = require("fs").readFileSync(0).toString().split("\n");
 let input = () => __lines.shift();
 let write = text => process.stdout.write("" + text);
@@ -113,7 +114,7 @@ function to_vet(token) {
     return inside === "" ? [] : inside.split(",").map(x => +x)
 }
 
-// -------------------------- MAIN --------------------------
+// ------------------- MAIN -------------------
 
 function main() {
     let chain = new Map();
@@ -129,7 +130,7 @@ function main() {
     execute(chain, ui);
 }
 
-// ------------ Funções do Shell --------------------
+// ------------------- Funções do Shell -------------------
 
 let execute = (chain, ui) => __shell(chain, ui, true);
 let shell   = (chain, ui) => __shell(chain, ui, false);
