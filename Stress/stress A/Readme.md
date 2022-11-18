@@ -1,5 +1,5 @@
 ## @000 Estressados A: Busca
-***
+
 **Funções**:
 
 - **in**: existe determinado valor na fila?
