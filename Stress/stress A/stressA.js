@@ -1,3 +1,4 @@
+// ------------------- Leitura e Escrita ------------------
 let lines = require("fs").readFileSync(0).toString().split("\n");
 let read = () => lines.shift();
 let show = text => process.stdout.write("" + text);

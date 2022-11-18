@@ -112,7 +112,7 @@ function fmt(vet) {
     return "[" + vet.join(", ") + "]";
 }
 
-// ------------------- MAIN -------------------
+//Função principal >>> replit & moodle
 
 function main() {
     while (true) {

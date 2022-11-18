@@ -1,3 +1,9 @@
+// ------------------- Leitura e Escrita ------------------
+let __lines = require("fs").readFileSync(0).toString().split("\n");
+let input = () => __lines.shift();
+let write = text => process.stdout.write("" + text);
+let puts = text => console.log(text);
+
 //Faça uma contagem de quantas vezes cada nível de stress aparece e
 // retorne essa contagem ordenado pelo nível de stress.
 function occurr(vet) {
@@ -30,8 +36,24 @@ function erase(vet, pos_list) { //todo
 function clear(vet, value) { //todo
 }
 
+function to_vet(token) {
+    let size = token.length;
+    let inside = token.substring(1, size - 1);
+    return inside === "" ? [] : inside.split(",").map(x => +x)
+}
 
-// -------------------------- MAIN --------------------------
+function fmt(vet) {
+    return "[" + vet.join(", ") + "]";
+}
+
+function fmtpair(vet) {
+    return fmt(vet.map((x) => {
+        let [key, value] = x;
+        return "" + key + ":" + value;
+    }));
+}
+
+// ------------------- MAIN -------------------
 
 function main() {
     let chain = new Map();
@@ -50,47 +72,7 @@ function main() {
     execute(chain, ui);
 }
 
-// ------------ Funções de Leitura --------------------
-
-// Caso não interativo via moodle
-let __lines = require("fs").readFileSync(0).toString().split("\n");
-let input = () => __lines.shift();
-
-// Caso interativo via readline
-// let readline = require("readline-sync")
-// let input = () => readline.question();
-
-// ------------ Funções de Escrita --------------------
-
-let write = text => process.stdout.write("" + text);
-let puts = text => console.log(text);
-
-// ------------ Funções de Formatação --------------------
-
-// Função auxiliar para converter de string para vetor
-// "[1,2,3,4]" para [1, 2, 3, 4]
-function to_vet(token) {
-    let size = token.length;
-    let inside = token.substring(1, size - 1);
-    return inside === "" ? [] : inside.split(",").map(x => +x)
-}
-
-//Converte de vetor para string sem inserir os espaços
-//[1, 2, 3, 4] => "[1,2,3,4]"
-function fmt(vet) {
-    return "[" + vet.join(", ") + "]";
-}
-
-function fmtpair(vet) {
-    return fmt(vet.map((x) => {
-        let [key, value] = x;
-        return "" + key + ":" + value;
-    }));
-}
-
-
-// ------------ Funções do Shell --------------------
-
+// ------------------- Funções do Shell -------------------
 
 let execute = (chain, ui) => __shell(chain, ui, true);
 let shell   = (chain, ui) => __shell(chain, ui, false);
