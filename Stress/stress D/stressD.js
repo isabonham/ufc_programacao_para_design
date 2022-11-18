@@ -1,11 +1,7 @@
 //Faça uma contagem de quantas vezes cada nível de stress aparece e
 // retorne essa contagem ordenado pelo nível de stress.
 function occurr(vet) {
-    new_vet = [];
-    for (let i = 0; i < vet.length; i++) {
-        new_vet[vet[i]]++;
-    }
-    return new_vet
+    
 }
 
 //retorna um vetor de pares
