@@ -16,14 +16,14 @@ function inside(vet, value) {
 
 // index_of: qual posição aparece X na fila pela primeira vez?
 function index_of(vet, value) {
-    let index = 0;
+    let index = -1;
     for (let i = 0; i < vet.length; i++) {
         if (value === vet[i]){
             index = i;
             return index;
         }
     }
-    return -1;
+    return index;
 }
 
 // find_if: qual a posição do primeiro homem da fila?

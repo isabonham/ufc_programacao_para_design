@@ -37,7 +37,6 @@ function average (vet) {
 function more_men (vet) {
     let men = 0;
     let women = 0;
-    
     for (let elem of vet) {
         if (elem > 0) {
             men++;
@@ -46,31 +45,25 @@ function more_men (vet) {
             women++;
         }
     }
-    
     if (women === men) {
         return ("draw");
     }
     return (women > men ? "women" : "men");
-    
 }
 
 // half_compare: qual metade da lista é mais estressada?
 function half_compare (vet) {
     let size = vet.length;
     let meio = Math.floor(size / 2);
-    
     let v_first = soma_vet(vet, 0, meio);
-    
     if (size % 2 === 1) {
         meio += 1;
     }
-
     let v_second = soma_vet(vet, meio, size);
     if (v_first === v_second) {
         return ("draw");
     }
     return (v_first > v_second ? "first" : "second");
-    
 }
 
 // sex_battle: quem é mais estressado em média? [draw, men, women]
@@ -79,7 +72,6 @@ function sex_battle (vet) {
     let men = 0;
     let s_women = 0;
     let s_men = 0;
-    
     for (let elem of vet) {
         if (elem > 0) {
             men += Math.abs(elem);
@@ -90,10 +82,8 @@ function sex_battle (vet) {
             s_women++;
         }
     }
-    
     let m_women = women / s_women;
     let m_men = men / s_men;
-    
     if (m_women === m_men) {
         return ("draw");
     }
