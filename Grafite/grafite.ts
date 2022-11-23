@@ -51,7 +51,7 @@ class Lead {
     }
 }
 
-class Pencil { //todo
+class Pencil {
     private thickness: number;
     private tip: Lead | null;
 
@@ -140,5 +140,4 @@ class Pencil { //todo
         return "calibre: " + this.thickness +
                 ", grafite: " + (this.tip != null ? "[" + this.tip.toString() + "]" : "null");
     }
-
 }
