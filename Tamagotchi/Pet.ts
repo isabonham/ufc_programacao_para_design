@@ -1,4 +1,4 @@
-class Pet { //todo
+class Pet {
     private energyMax: number;
     private hungryMax: number;
     private cleanMax: number;
@@ -67,7 +67,7 @@ class Pet { //todo
         this.clean += value;
     }
 
-    public setDiamonds (value: number) {
+    public setDiamonds(value: number) {
         this.diamonds += value;
     }
 
@@ -157,5 +157,4 @@ class Pet { //todo
             + `, L:${this.clean}/${this.cleanMax}` 
             + `, D:${this.diamonds}, I:${this.age}`;
     }
-
 }
