@@ -66,8 +66,6 @@ class Board {
         
         if (playerTime!.isFree()) {
             playerTime!.setPos(value);
-
-            // verifica se o jogador venceu
             if (playerTime!.getPos() === this.size) {
                 this.running = false;
                 console.log ("player" + playerTime!.getLabel() + " ganhou");
@@ -82,8 +80,6 @@ class Board {
             else {
                 console.log ("player" + playerTime!.getLabel() + " andou para " + playerTime!.getPos());
             }
-
-            // verifica se caiu em armadilha
             for (let i = 0; i < this.trapList.length; i++) {
                 if (playerTime!.getPos() === this.trapList[i]) {
                     playerTime!.setFree(false);
