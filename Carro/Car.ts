@@ -1,11 +1,3 @@
-/*
-O QUE APRENDI: o que são atributos e para que servem os métodos;
-COM QUEM APRENDI: com o professor durante a aula;
-COMO APRENDI: prestando atenção no que o professor tava ensinando;
-
-TEMPO: 1H 30min >>>>> tempo da aula
-*/
-
 class Car {
     public pass: number;
     public passMax: number;
@@ -73,56 +65,3 @@ class Car {
       }
     }    
 }
-
-let carro1 = new Car();
-
-
-// CASOS DE TESTE
-
-//#__case inicializar
-console.log("\n#__case inicializar\n");
-
-console.log("" + carro1);
-carro1.enter();
-carro1.enter();
-console.log("" + carro1);
-carro1.enter();
-console.log("" + carro1);
-carro1.leave();
-carro1.leave();
-carro1.leave();
-console.log("" + carro1);
-
-//#__case abastecer
-console.log("\n#__case abastecer\n");
-
-carro1.fuel(60);
-console.log("" + carro1);
-
-//#__case dirigir vazio
-console.log("\n#__case dirigir vazio\n");
-
-carro1.drive(10);
-
-//#__case dirigir
-console.log("\n#__case dirigir\n");
-
-carro1.enter();
-carro1.drive(10);
-console.log("" + carro1);
-
-//#__case para longe
-console.log("\n#__case para longe\n");
-
-carro1.drive(70);
-carro1.drive(10);
-console.log("" + carro1);
-
-//#__case enchendo o tanque
-console.log("\n#__case enchendo o tanque\n");
-
-carro1.fuel(200);
-console.log("" + carro1);
-
-//#__end__
-console.log("\n#__end__\n");
