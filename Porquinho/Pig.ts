@@ -114,7 +114,6 @@ class Pig {
     }
 
     public addCoin(coin: Coin): boolean {
-        console.log ("" + coin);
         if (this.broken) {
             console.log ("fail: the pig is broken");
             return false;
