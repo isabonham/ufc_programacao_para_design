@@ -1,4 +1,4 @@
-## @040 Estressados B: Contagem
+## Estressados B: Contagem
 ***
 **Funções**:
 
