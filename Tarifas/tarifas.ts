@@ -36,8 +36,17 @@ class Account {
   
     // se o índice for válido e representar uma operação de tarifa
     // adicione o mesmo valor tarifado, mas com label de reverse(extorno)
-    public reverse(index: number) : void {
-
+    public reverse(index: number[]): boolean {
+        console.log (index)
+        for (let i = 0; i < index.length; i++) {
+            if (index[i] < 0 || index[i] > this.balanceManager.getExtract.length) {
+                console.log ("fail: index " + index[i] + " invalid");
+            }
+            // else if (this.balanceManager.getExtract[index[i]].getLabel() !== "fee") {
+            //     console.log ("fail: index " + index[i] + " is not a fee");
+            // }
+        }
+        return true;
     }
   
     // só realiza a operação se houver dinheiro suficiente na conta
@@ -52,7 +61,7 @@ class Account {
     }
 
     public getBalanceManager(index: number) {
-        console.log(this.balanceManager.getExtract(0));
+        return (this.balanceManager.getExtract(index));
         // return this.balanceManager.toString();
     }
 
@@ -92,8 +101,17 @@ class BalanceManager {
     }
 
     // se qtdOp for 0, valor default, retornar todo o extrato
-    public getExtract(qtdOp: number): Array<Operation> {
-        return this.extract;
+    public getExtract(index: number): Array<Operation> {
+        let ext = new Array<Operation>;
+        if (index === 0) {
+            return this.extract;
+        }
+        else {
+            for (let i = this.extract.length - 1; i > this.extract.length - index - 1; i--) {
+                ext.unshift(this.extract[i]);
+            }
+            return ext;
+        }
     }
 
     public toString(): String {
@@ -116,10 +134,12 @@ class Operation {
     }
   
     public toString() : String {
-        return this.index + ": "
-             + this.label + ": "
-             + this.value + ": "
-             + this.balance + "\n";
+        let value = this.value.toString();
+        let balance = this.balance.toString();
+        return " " + this.index + ": "
+             + this.label.padStart(8) + ": "
+             + value.padStart(4) + ": "
+             + balance.padStart(4);
     }
 
     public getBalance(): number {
@@ -141,13 +161,13 @@ function main() {
   let ui = [];
   let conta = new Account(0);
 
-  chain.set("show", () => print("" + conta));
-  chain.set("init", () => conta = new Account(+ui[1]));
+  chain.set("show",     () => print("" + conta));
+  chain.set("init",     () => conta = new Account(+ui[1]));
   chain.set("deposit",  () => conta.deposit(+ui[1]));
-  chain.set("withdraw",   () => conta.withdraw(+ui[1]));
-  chain.set("fee",   () => conta.fee(+ui[1]));
-  chain.set("extract",   () => conta.getBalanceManager());
-  // chain.set("comprar",   () => machine.buyItem(+ui[1]));
+  chain.set("withdraw", () => conta.withdraw(+ui[1]));
+  chain.set("fee",      () => conta.fee(+ui[1]));
+  chain.set("extract",  () => console.log(conta.getBalanceManager(+ui[1]).map(x=> "" + x).join("\n").padStart(1)));
+  chain.set("reverse",   () => conta.reverse(ui[1]));
   
   execute(chain, ui);
 }
