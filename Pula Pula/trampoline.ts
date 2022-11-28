@@ -24,14 +24,13 @@ class Kid {
 class Trampoline {
     playing : Array<Kid | null>;
     waiting : Array<Kid>;
-    size : number;
 
     public constructor(){
         this.playing = new Array<Kid>(); 
         this.waiting = new Array<Kid>();
     }
   
-    arrive (kid: Kid) : boolean {
+    arrive(kid: Kid): boolean {
         this.waiting.unshift(kid);
         return true;
     }
@@ -43,20 +42,17 @@ class Trampoline {
         if (this.size === this.playing.length) {
             return console.log("pulapula cheio");
         }
-        this.playing.unshift(this.waiting[this.waiting.length-1]);
-        this.waiting.pop();
+        this.playing.unshift(this.waiting.pop()!);
     }
 
     leave() {
         if(this.playing.length == 0) {
             return "não há ninguem no pulapula";
         }
-        let kid = this.playing[this.playing.length-1];
-        this.waiting.unshift(kid!);
-        this.playing.pop();
+        this.waiting.unshift(this.playing.pop()!);
     }
 
-    remove(kid : string) {
+    remove(kid: string) {
         if(this.waiting.length == 0 && this.playing.length == 0){
             return ("pulapula e fila vazios");
         }

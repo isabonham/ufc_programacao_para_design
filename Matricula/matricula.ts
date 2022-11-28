@@ -2,6 +2,11 @@ class Aluno {
     private id: string;
     private discps: Map<string, Discp>;
 
+    public constructor(id: string) {
+        this.id = id;
+        this.discps = new Map();
+    }
+
     public getId() {
         return this.id;
     }

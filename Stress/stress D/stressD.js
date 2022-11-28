@@ -4,37 +4,120 @@ let input = () => __lines.shift();
 let write = text => process.stdout.write("" + text);
 let puts = text => console.log(text);
 
-//Faça uma contagem de quantas vezes cada nível de stress aparece e
-// retorne essa contagem ordenado pelo nível de stress.
-function occurr(vet) {
+// function occurr(vet) { //todo
     
+// }
+
+function teams(vet) {
+  let saida = "[";
+  let aux = 1;
+
+  for (let i = 0; i < vet.length; i++) {
+    if (vet[i] === vet[i+1]) {
+      aux++;
+    }
+    else {
+      if (i === vet.length - 1 ) {
+        saida += vet[i] + ":" + aux;
+      }
+      else {
+        saida += vet[i] + ":" + aux + ", ";
+      }
+      aux = 1;
+    }
+  }
+  saida += "]";
+  return saida;
 }
 
-//retorna um vetor de pares
-function teams(vet) { //todo
-
+function mnext(vet) {
+  let v = vet.slice();
+  let new_vet = vet.fill(0);
+  
+  for (let i = 0; i <= v.length - 1; i++) {
+    if (v[i] > 0 && (v[i - 1] < 0 || v[i + 1] < 0)) {
+      new_vet[i] = 1;
+    }
+  }
+  return new_vet;
 }
 
-function mnext(vet) { //todo
+function alone(vet) {
+  let v = vet.slice();
+  let new_vet = vet.fill(0);
+
+  for (let i = 0; i <= v.length - 1; i++) {
+    if (v.length === 1) {
+      if (v[i] > 0) {
+        new_vet[i] = 1;
+      }
+    }
+    else {
+      if (i == 0) {
+        if (v[i + 1] > 0 && v[i] > 0) {
+          new_vet[i] = 1;
+        }
+      }
+      else if (i == v.length - 1) {
+        if (v[i - 1] > 0 && v[i] > 0) {
+          new_vet[i] = 1;
+        }
+      }
+      else {
+        if ((v[i + 1] > 0 && v[i - 1] > 0 && v[i] > 0)) {
+          new_vet[i] = 1;
+        }
+      }
+    }
+  }
+  return new_vet;
 }
 
-function alone(vet) { //todo
+function couple(vet) {
+  let saida = 0;
+
+  for (let i = 0; i < vet.length; i++) {
+    for (let j = 0; j < vet.length; j++) {
+      if (vet[i] > 0 && vet[j] < 0) {
+        if (Math.abs(vet[i] === Math.abs(vet[j]))) {
+          saida++;
+          vet.splice(i, 1);
+          vet.splice(j, 1);
+        }
+      }
+    }
+  }
+
+  return saida;
 }
 
-function couple(vet) { //todo
+// function has_subseq(vet, seq, pos) { //todo
+// }
+
+function subseq(vet, seq) {
+  for (let i = 0; i < vet.length; i++) {
+    if (vet[i] === seq[0]) {
+      let cont = 0;
+      for (let j = 0; j < seq.length; j++) {
+        if (vet[i+j] === seq[j]) {
+          cont++;
+        }
+      }
+      if (cont === seq.length) {
+        return i;
+      }
+    }
+  }
+  return -1;
 }
 
-function has_subseq(vet, seq, pos) { //todo
-}
+// function erase (vet, pos) { //todo
 
-function subseq(vet, seq) { //todo
-}
+// }
 
-function erase(vet, pos_list) { //todo
-}
+// function clear (vet, value) { //todo
 
-function clear(vet, value) { //todo
-}
+// }
 
 function to_vet(token) {
     let size = token.length;
@@ -99,5 +182,4 @@ function __shell(chain, ui, on_moodle) {
     }
 }
 
-main()
-
+main();
