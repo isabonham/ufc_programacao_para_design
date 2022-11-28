@@ -59,14 +59,14 @@ class Yakissoba extends Chines {
     protected yakissoba: string;
     protected alergico: boolean;
 
-    public constructor(sabor: string, molho : string, tipo : string, preparo : number) {
+    public constructor(sabor: string, molho: string, tipo: string, preparo: number) {
         super(molho, tipo, preparo);
         this.yakissoba = "yakissoba";
         this.alergico = false;
         this.sabor = sabor;
     }
 
-    public cozinhar() : any {
+    public cozinhar() {
         this.time++;
         if(this.time < this.preparo) {
             return console.log(`seu yakissoba de ${this.sabor} com molho ${this.molho} está cozinhando`);
@@ -79,7 +79,7 @@ class Yakissoba extends Chines {
         }
     }
 
-    getRandomIntInclusive(min : number, max: number) : number {
+    getRandomIntInclusive(min: number, max:number): number {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
