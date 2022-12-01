@@ -1,4 +1,3 @@
-// essa enumeração guarda possíveis labels para as operações
 enum Label {
     deposit = "deposit",
     fee = "fee",
@@ -16,65 +15,59 @@ class Account {
         this.balanceManager = new BalanceManager();
         this.balanceManager.addOperation(Label.opening, 0);
     }
-    
-    // adiciona valor à conta
+
     public deposit(value: number) : boolean {
         if (value < 0) {
             console.log ("fail: invalid value");
             return false;
         }
         this.balanceManager.addOperation(Label.deposit, value);
-        // this.balanceManager.setBalance(value);
         return true;
     }
 
-    // retira o dinheiro, mesmo que o balance fique negativo
     public fee(value: number) : void {
-        // this.balanceManager.setBalance(-value);
         this.balanceManager.addOperation(Label.fee, -value);
     }
   
     // se o índice for válido e representar uma operação de tarifa
     // adicione o mesmo valor tarifado, mas com label de reverse(extorno)
-    public reverse(index: number[]): boolean {
-        console.log (index)
-        for (let i = 0; i < index.length; i++) {
-            if (index[i] < 0 || index[i] > this.balanceManager.getExtract.length) {
-                console.log ("fail: index " + index[i] + " invalid");
-            }
-            // else if (this.balanceManager.getExtract[index[i]].getLabel() !== "fee") {
-            //     console.log ("fail: index " + index[i] + " is not a fee");
-            // }
+    public reverse(index: number): boolean {
+        if (index < 0 || index > this.balanceManager.gExtract().length) {
+            console.log ("fail: index " + index + " invalid");
+            return false;
         }
+        else if (this.balanceManager.gExtract()[index].getLabel() !== "fee") {
+            console.log ("fail: index " + index + " is not a fee");
+            return false
+        }
+        let value = this.balanceManager.gExtract()[index].getValue();
+        this.balanceManager.addOperation(Label.reverse, -value);
         return true;
+
     }
-  
-    // só realiza a operação se houver dinheiro suficiente na conta
+
     public withdraw(value: number) : boolean {
         if (this.balanceManager.getBalance() - value < 0) {
             console.log ("fail: insufficient balance");
             return false;
         }
-        // this.balanceManager.setBalance(-value);
         this.balanceManager.addOperation(Label.withdraw, -value);
         return true;
     }
 
     public getBalanceManager(index: number) {
         return (this.balanceManager.getExtract(index));
-        // return this.balanceManager.toString();
     }
 
     public toString(): String {
         return "account:"+ this.id + " balance:" + this.balanceManager.getBalance();
     }
 }
-  
-//   nessa classe são efetivadas e registradas as alterações no saldo
+
 class BalanceManager {
     
-    private balance: number; // saldo do cliente
-    private extract: Array<Operation>; // extrato
+    private balance: number;
+    private extract: Array<Operation>;
     private nextId: number
 
     public constructor() {
@@ -82,10 +75,7 @@ class BalanceManager {
         this.extract = new Array<Operation>;
         this.nextId = 0;
     }
-  
-    // adiciona value ao balance
-    // crie operação e adicione ao vetor de operações
-    // incrementa o nextId
+
     public addOperation(label: Label, value: number) {
         this.balance += value;
         this.extract.push(new Operation(this.nextId, label, value, this.balance));
@@ -100,7 +90,10 @@ class BalanceManager {
         this.balance += value;
     }
 
-    // se qtdOp for 0, valor default, retornar todo o extrato
+    public gExtract() {
+        return this.extract;
+    }
+
     public getExtract(index: number): Array<Operation> {
         let ext = new Array<Operation>;
         if (index === 0) {
@@ -119,12 +112,11 @@ class BalanceManager {
     }
 }
 
-// operação guarda os dados de uma única operação
 class Operation {
     private index: number;
     private label: Label;
-    private value: number // valor em negativo se estiver diminuindo o saldo
-    private balance: number // saldo residual apos operação
+    private value: number
+    private balance: number
     
     public constructor(index: number, label: Label, value: number, balance: number) {
         this.index = index;
@@ -134,9 +126,11 @@ class Operation {
     }
   
     public toString() : String {
+        let index = this.index.toString();
         let value = this.value.toString();
         let balance = this.balance.toString();
-        return " " + this.index + ": "
+
+        return index.padStart(2) + ": "
              + this.label.padStart(8) + ": "
              + value.padStart(4) + ": "
              + balance.padStart(4);
@@ -155,80 +149,3 @@ class Operation {
         return this.value;
     }
 }
-
-function main() {
-  let chain = new Map();
-  let ui = [];
-  let conta = new Account(0);
-
-  chain.set("show",     () => print("" + conta));
-  chain.set("init",     () => conta = new Account(+ui[1]));
-  chain.set("deposit",  () => conta.deposit(+ui[1]));
-  chain.set("withdraw", () => conta.withdraw(+ui[1]));
-  chain.set("fee",      () => conta.fee(+ui[1]));
-  chain.set("extract",  () => console.log(conta.getBalanceManager(+ui[1]).map(x=> "" + x).join("\n").padStart(1)));
-  chain.set("reverse",   () => conta.reverse(ui[1]));
-  
-  execute(chain, ui);
-}
-
-// ------------ Funções de Leitura --------------------
-
-// Caso não interativo via moodle
-let __lines = require("fs").readFileSync(0).toString().split("\n");
-let input = () => __lines.shift();
-
-// Caso interativo via readline
-// let readline = require("readline-sync")
-// let input = () => readline.question();
-
-// ------------ Funções de Escrita --------------------
-
-let write = text => process.stdout.write("" + text);
-let print = text => console.log(text);
-
-// ------------ Funções de Formatação --------------------
-
-// Função auxiliar para converter de string para vetor
-// "[1,2,3,4]" para [1, 2, 3, 4]
-function to_vet(token) {
-    let size = token.length;
-    let inside = token.substring(1, size - 1);
-    return inside === "" ? [] : inside.split(",").map(x => +x)
-}
-
-//Converte de vetor para string sem inserir os espaços
-//[1, 2, 3, 4] => "[1,2,3,4]"
-function fmt(vet) {
-    return "[" + vet.join(", ") + "]";
-}
-
-// ------------ Funções do Shell --------------------
-
-
-let execute = (chain, ui) => __shell(chain, ui, true);
-let shell   = (chain, ui) => __shell(chain, ui, false);
-
-function __shell(chain, ui, on_moodle) {
-    while (true) {
-        if (!on_moodle)
-            write("$")
-        let line = input();
-        if (on_moodle)
-            print("$" + line);
-            
-        ui.splice(0); //apagar tudo
-        line.split(" ").forEach(x => ui.push(x));
-        
-        let cmd = ui[0];
-        if (cmd == "end") {
-            return;
-        } else if (chain.has(cmd)) {
-            chain.get(cmd)();
-        } else {
-            print("fail: command not found");
-        }
-    }
-}
-
-main();
