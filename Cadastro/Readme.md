@@ -20,8 +20,8 @@ Seu sistema deverá ser capaz de:
 - O que fez?
   - Fiz tudo e passei em todos os testes.
 - Com quem fez?
-  - Fiz tudo sozinha. Tentei implementar as funções com exceções mas não consegui usar o try catch. 
+  - Fiz tudo sozinha. 
 - O que aprendeu?
-  - Manipulação de Mapas e como tratar referências cruzadas. 
+  - Manipulação de Mapas e como tratar referências cruzadas. Tentei implementar as funções com exceções mas não consegui usar o try catch.
 - Quanto tempo levou?
   - Entre 2 a 3 horas.
