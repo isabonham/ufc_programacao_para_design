@@ -1,56 +1,148 @@
 class Aluno {
-    private id: string;
-    private discps: Map<string, Discp>;
-
-    public constructor(id: string) {
-        this.id = id;
-        this.discps = new Map();
+    private nome: string;
+    private disciplinas: Map<string, Disciplina>;
+    
+    public constructor(nome: string) {
+        this.nome = nome;
+        this.disciplinas = new Map<string, Disciplina>();
     }
 
-    public getId() {
-        return this.id;
+    public getNome(): string {
+        return this.nome;
     }
 
-    public addDiscp(discp: Discp) {
-        if (this.discps.has(discp.getId())) {
+    public getDisciplinas(): string[] {
+        return [...this.disciplinas.keys()];
+    }
+
+    public addDisciplina(disciplina: Disciplina): void {
+        let chave = disciplina.getNome();
+        if (this.disciplinas.has(chave))
             return;
-        }
-        this.discps.set(discp.getId(), discp);
-        discp.addAluno(this);
+        this.disciplinas.set(chave, disciplina);
+        disciplina.addAluno(this);
     }
 
-    public rmDiscp(discp: string) {
-        let d = this.discps.get(discp) 
-        if (d === undefined) {
-            return;           
+    public removeDisciplina(key: string): void {
+        let disciplina: undefined | Disciplina = this.disciplinas.get(key);
+        if (disciplina !== undefined) {
+            this.disciplinas.delete(key);
+            disciplina.removeAluno(this.nome);
         }
-        this.discps.delete(discp);
-        d.rmAluno(this.id);
+    }
+
+    public toString(): string {
+        let keys = this.disciplinas.keys();
+        return this.nome + " [" + [...keys].sort().join(", ") + "]";
     }
 }
 
-class Discp {
-    private id: string;
+class Disciplina {
+    private nome: string;
     private alunos: Map<string, Aluno>;
-
-    public getId() {
-        return this.id;
+    
+    public constructor(nome: string) {
+        this.nome = nome;
+        this.alunos = new Map<string, Aluno>();
     }
 
-    public addAluno (aluno: Aluno) {
-        if (this.alunos.has(aluno.getId())) {
+    public getNome(): string {
+        return this.nome;
+    }
+
+    public addAluno(aluno: Aluno): void {
+        let chave = aluno.getNome();
+        if (this.alunos.has(chave))
             return;
-        }
-        this.alunos.set(aluno.getId(), aluno);
-        aluno.addDiscp(this);
+        this.alunos.set(chave, aluno);
+        aluno.addDisciplina(this);
     }
 
-    public rmAluno(aluno: string) {
-        let a = this.alunos.get(aluno) 
-        if (a === undefined) {
-            return;           
+    public removeAluno(key: string): void {
+        let aluno: Aluno | undefined = this.alunos.get(key);
+        if (aluno !== undefined) {
+            this.alunos.delete(key);
+            aluno.removeDisciplina(this.nome);
         }
-        this.alunos.delete(aluno);
-        a.rmDiscp(this.id);
+    }
+
+    public getAlunos(): string[] {
+        return [...this.alunos.keys()];
+    }
+
+    public toString(): string {
+        let keys = this.alunos.keys();
+        return this.nome + " [" + [...keys].sort().join(", ") + "]";
+    }
+}
+
+class Sistema {
+    private alunos: Map<string, Aluno>;
+    private disciplinas: Map<string, Disciplina>;
+
+    public constructor() {
+        this.alunos = new Map<string, Aluno>();
+        this.disciplinas = new Map<string, Disciplina>();
+    }
+    public addAluno(aluno: Aluno): void {
+        let chave = aluno.getNome();
+        if (this.alunos.has(chave))
+            return;
+        this.alunos.set(chave, aluno);
+    }
+
+    public addDisciplina(disciplina: Disciplina): void {
+        let chave = disciplina.getNome();
+        if (this.disciplinas.has(chave))
+            return;
+        this.disciplinas.set(chave, disciplina);
+    }
+
+    public getAluno(nome: string): Aluno {
+        let aluno: undefined | Aluno = this.alunos.get(nome);
+        if (aluno === undefined)
+            throw new Error("Aluno não encontrado");
+        return aluno;
+    }
+
+    public getDisciplina(nome: string): Disciplina {
+        let disciplina =  this.disciplinas.get(nome);
+        if (disciplina === undefined)
+            throw new Error("Disciplina não encontrada");
+        return disciplina;
+    }
+
+    public removerAluno(nome: string): void {
+        let aluno = this.getAluno(nome);
+        for (let disc of aluno.getDisciplinas()) {
+            aluno.removeDisciplina(disc);
+        }
+        this.alunos.delete(nome);
+    }
+
+    public removerDisciplina(nome: string): void {
+        let disciplina = this.getDisciplina(nome);
+
+        for (let aluno of disciplina.getAlunos()) {
+            disciplina.removeAluno(aluno);
+        }
+
+        this.disciplinas.delete(nome);
+    }
+
+    public vincular(nome_aluno: string, nome_disciplina: string): void {
+        let aluno = this.getAluno(nome_aluno);
+        let discp = this.getDisciplina(nome_disciplina);
+        aluno.addDisciplina(discp);
+    }
+
+    public desvincular(nome_aluno: string, nome_disciplina: string): void {
+        this.getAluno(nome_aluno).removeDisciplina(nome_disciplina);
+    }
+
+    public toString(): string {
+        let alunos = [...this.alunos.values()].map(a => a.toString());
+        let discip = [...this.disciplinas.values()].map(d => d.toString());
+        return "- alunos\n" + alunos.sort().join("\n") + "\n- discps\n" + discip.sort().join("\n");
     }
 }
