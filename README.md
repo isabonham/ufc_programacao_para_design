@@ -1,2 +1,2 @@
-# ufc_programacao_para_design
+# Programação para Design - 2022.2
 Atividades resolvidas na disciplina de Programação para Design
