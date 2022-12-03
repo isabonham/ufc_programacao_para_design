@@ -22,7 +22,7 @@ null para indicar que o caixa está vazio ou terá um objeto cliente.
 - O que fez?
   - Fiz tudo e passei em todos os testes.
 - Com quem fez?
-  - Fiz uma parte com o professor em implementação conjunta com a turma em aula. O restante fiz sozinha, tirando apenqas uma dúvida com o Wilhelm sobre o uso do ? pra verificação de objetos nulos e o uso do ! pra afirmação de objetos não nulos.
+  - Fiz uma parte com o professor em implementação conjunta com a turma em aula. O restante fiz sozinha, tirando apenas uma dúvida com o Wilhelm sobre o uso das ? e ! pra verificação e validação de objetos nulos ou não nulos.
 - O que aprendeu?
   - Aprendi o funcionamento e implementação de Arrays.
 - Quanto tempo levou?
