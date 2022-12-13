@@ -62,6 +62,10 @@ class User {
 
     public like (id: number) {
         let tweet = this.inbox.getTweet(id);
+        if (tweet === undefined) {
+            console.log("fail: tweet nao existe");
+            return;
+        }
         tweet.like(this.getUsername());
     }
 
@@ -171,10 +175,10 @@ class Inbox {
         return saida;
     }
 
-    public getTweet(id:number): Tweet {
+    public getTweet(id:number) {
         let tweet: undefined | Tweet = this.timeline.get(id);
         if (tweet === undefined) {
-            throw new Error("Tweet não encontrado");
+            return;
         }
         return tweet;
     }
@@ -293,12 +297,13 @@ function main() {
 
   chain.set("show", () => print("" + tt));
   chain.set("add",  () => tt.cadastrar(ui[1]));
-  chain.set("follow", () => {let one = tt.getUser(ui[1])!; let two = tt.getUser(ui[2])!; one.follow(two);});
+  chain.set("follow", () => {let one = tt.getUser(ui[1])!; let two = tt.getUser(ui[2])!; if (two === undefined) {console.log("fail: usuario nao encontrado")} else {one.follow(two);}});
   chain.set("twittar", () => {let user = ui[1]; let msg = ""; for (let i = 2; i < ui.length; i++) {msg += ui[i] + " ";} tt.Twittar(user, msg)});
   chain.set("timeline",   () => {let user = tt.getUser(ui[1]); if (user === undefined) {console.log("fail: usuario nao encontrado")} else {console.log("" + user.getTimeline())}});
   chain.set("like", () => {let user = tt.getUser(ui[1])!; user.like(+ui[2])});
   chain.set("unfollow", () => {let user = tt.getUser(ui[1])!; user.unfollow(ui[2])});
   chain.set("rt", () => {let msg = ""; for (let i = 3; i < ui.length; i++) {msg += ui[i] + " ";} tt.rt(ui[1], +ui[2], msg)});
+  chain.set("rm", () => tt.rmvUser(ui[1]));
   
   execute(chain, ui);
 }
