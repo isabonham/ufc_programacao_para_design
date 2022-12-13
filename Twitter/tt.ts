@@ -147,11 +147,6 @@ class Tweet {
             likes = "";
         }
         let saida = `${this.id}:${this.sender} (${this.msg})${likes}\n`;
-        // if (this.getLikes().length !== 0) {
-        //     saida += `[${[this.getLikes()].join(", ")}]\n`;
-        // }
-        // if (this.rt !== null)
-        // tweet += `\n    ~Retweeted: (${this.rt.getId()}) ${this.rt.getSender()}: ${this.rt.getMsg()}`
         return saida; 
     }
 }
@@ -283,14 +278,7 @@ class Controller {
         let saida2 = new Array()
         for(let twiteiros of this.users.values()) {
             saida += `${twiteiros.toString()}\n`
-        }    
-        // saida += "\n" 
-        // for (let timeline of this.users.values()) {
-        //     let users = this.users.get(timeline.getUsername())
-        //     // if (users == undefined)
-        //     // throw new Error("Isso nunca vai cair")
-        //     saida += `${users!.showInbox()}\n`
-        // }
+        }
         return saida;
     }
 }
