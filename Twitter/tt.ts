@@ -253,7 +253,7 @@ class Controller {
         if(user === undefined) {
             throw new Error("Usuário inexistente");
         }
-        let tweet:Tweet = user.getInbox().getTweet(twId);
+        let tweet:Tweet = user.getInbox().getTweet(twId)!;
         let rt = this.createTweet(sender, rtMsg);
         rt.setRT(tweet);
         user.twittar(rt);
@@ -287,85 +287,3 @@ class Controller {
         return saida;
     }
 }
-
-
-
-
-function main() {
-  let chain = new Map();
-  let ui = [];
-  let tt = new Controller();
-
-  chain.set("show", () => print("" + tt));
-  chain.set("add",  () => tt.cadastrar(ui[1]));
-  chain.set("follow", () => {let one = tt.getUser(ui[1])!; let two = tt.getUser(ui[2])!; if (two === undefined) {console.log("fail: usuario nao encontrado")} else {one.follow(two);}});
-  chain.set("twittar", () => {let user = ui[1]; let msg = ""; for (let i = 2; i < ui.length; i++) {msg += ui[i] + " ";} tt.Twittar(user, msg)});
-  chain.set("timeline",   () => {let user = tt.getUser(ui[1]); if (user === undefined) {console.log("fail: usuario nao encontrado")} else {console.log("" + user.getTimeline())}});
-  chain.set("like", () => {let user = tt.getUser(ui[1])!; user.like(+ui[2])});
-  chain.set("unfollow", () => {let user = tt.getUser(ui[1])!; user.unfollow(ui[2])});
-  chain.set("rt", () => {let msg = ""; for (let i = 3; i < ui.length; i++) {msg += ui[i] + " ";} tt.rt(ui[1], +ui[2], msg)});
-  chain.set("rm", () => tt.rmvUser(ui[1]));
-  
-  execute(chain, ui);
-}
-
-// ------------ Funções de Leitura --------------------
-
-// Caso não interativo via moodle
-let __lines = require("fs").readFileSync(0).toString().split("\n");
-let input = () => __lines.shift();
-
-// Caso interativo via readline
-// let readline = require("readline-sync")
-// let input = () => readline.question();
-
-// ------------ Funções de Escrita --------------------
-
-let write = text => process.stdout.write("" + text);
-let print = text => console.log(text);
-
-// ------------ Funções de Formatação --------------------
-
-// Função auxiliar para converter de string para vetor
-// "[1,2,3,4]" para [1, 2, 3, 4]
-function to_vet(token) {
-    let size = token.length;
-    let inside = token.substring(1, size - 1);
-    return inside === "" ? [] : inside.split(",").map(x => +x)
-}
-
-//Converte de vetor para string sem inserir os espaços
-//[1, 2, 3, 4] => "[1,2,3,4]"
-function fmt(vet) {
-    return "[" + vet.join(", ") + "]";
-}
-
-// ------------ Funções do Shell --------------------
-
-
-let execute = (chain, ui) => __shell(chain, ui, true);
-let shell   = (chain, ui) => __shell(chain, ui, false);
-
-function __shell(chain, ui, on_moodle) {
-    while (true) {
-        if (!on_moodle)
-            write("$")
-        let line = input();
-        if (on_moodle)
-            print("$" + line);
-            
-        ui.splice(0); //apagar tudo
-        line.split(" ").forEach(x => ui.push(x));
-        
-        let cmd = ui[0];
-        if (cmd == "end") {
-            return;
-        } else if (chain.has(cmd)) {
-            chain.get(cmd)();
-        } else {
-            print("fail: command not found");
-        }
-    }
-}
-
-main();
